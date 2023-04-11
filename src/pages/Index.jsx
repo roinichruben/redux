@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import apiCall from '../api';
 import MealItem from "../components/MealItem";
+import { fetchRecipesStart } from "../redux/actions/results";
 
 const Index = () => {
  const [searchText, setSearchText] = useState("");
@@ -11,6 +13,12 @@ const Index = () => {
  const [error, setError] = useState(null);
 
  const navigate = useNavigate();
+ const dispatch = useDispatch();
+
+
+useEffect(() => {
+dispatch(fetchRecipesStart());
+},[]);
 
  const handleSearchClick = async () => {
   try {
